@@ -15,6 +15,7 @@
     <source>
         <include>
             <file>app/Livewire/Auth/Login.php</file>
+            <file>app/Livewire/Auth/ForgotPassword.php</file>
         </include>
     </source>
     <php>
