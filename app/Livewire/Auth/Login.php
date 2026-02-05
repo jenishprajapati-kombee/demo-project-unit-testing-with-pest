@@ -29,7 +29,7 @@ class Login extends Component
         $request = request();
         $visitorId = $request->cookie('visitor_id');
 
-        if (! $visitorId) {
+        if (!$visitorId) {
             $visitorId = bin2hex(random_bytes(16));
             // Set the cookie for 30 days
             cookie()->queue(cookie('visitor_id', $visitorId, 60 * 24 * 30));
@@ -57,7 +57,7 @@ class Login extends Component
 
         if (App::environment(['production', 'uat'])) {
             $recaptchaResponse = ReCaptcha::verify($this->recaptchaToken);
-            if (! $recaptchaResponse['success']) {
+            if (!$recaptchaResponse['success']) {
                 $this->clearForm(); // clear all form data
                 Helper::logInfo(static::class, __FUNCTION__, __('messages.login.recaptchaError'), ['email' => $this->email]);
                 session()->flash('error', __('messages.login.recaptchaError'));
