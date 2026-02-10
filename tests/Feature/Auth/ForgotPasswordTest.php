@@ -2,11 +2,11 @@
 
 namespace Tests\Feature\Auth;
 
+use App\Livewire\Auth\ForgotPassword;
 use App\Models\User;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Livewire;
-use App\Livewire\Auth\ForgotPassword;
 
 beforeEach(function () {
     // Clear rate limits before each test to ensure isolation

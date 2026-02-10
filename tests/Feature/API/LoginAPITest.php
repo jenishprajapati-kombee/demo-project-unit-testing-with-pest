@@ -42,8 +42,8 @@ it('can login with valid credentials', function () {
                 'email',
                 'authorization',
                 'refresh_token',
-                'token_expires_at'
-            ]
+                'token_expires_at',
+            ],
         ])
         ->assertJsonPath('message', __('messages.login.success'));
 
@@ -113,7 +113,7 @@ it('can refresh tokens with valid refresh token', function () {
         ->assertJsonStructure([
             'authorization',
             'refresh_token',
-            'token_expires_at'
+            'token_expires_at',
         ]);
 
     // Old tokens should be deleted
