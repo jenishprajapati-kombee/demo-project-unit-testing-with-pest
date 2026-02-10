@@ -18,6 +18,7 @@
             <file>app/Livewire/Auth/Login.php</file>
             <file>app/Livewire/Auth/ForgotPassword.php</file>
             <file>app/Livewire/Brand/Create.php</file>
+            <file>app/Helper.php</file>
         </include>
     </source>
     <php>
