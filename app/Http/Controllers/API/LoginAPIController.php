@@ -37,7 +37,7 @@ class LoginAPIController extends Controller
         // ========================================================================
         $user = WebUser::where('email', $request->email)->first();
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return WebUser::GetError(__('messages.login.wrong_credentials'));
         }
 
@@ -83,28 +83,21 @@ class LoginAPIController extends Controller
     public function changePassword(ChangePasswordRequest $request)
     {
         // get all updated data.
-        $data = $request->all();
         $masterUser = WebUser::where('email', $request->user()->email)->first();
-        if (Hash::check($data['old_password'], $masterUser->password)) {
-            $masterUser->password = Hash::make($data['new_password']);
-            // update user password in master user table
-            if ($masterUser->save()) {
-                return response()->json([
-                    'message' => __('messages.api.password_changed'),
-                    'data' => '',
-                ]);
-            } else {
-                return response()->json([
-                    'message' => __('messages.api.something_wrong'),
-                    'data' => '',
-                ]);
-            }
-        } else {
+        $masterUser->password = Hash::make($request->new_password);
+
+        // update user password in master user table
+        if ($masterUser->save()) {
             return response()->json([
-                'message' => __('messages.api.invalid_old_password'),
+                'message' => __('messages.api.password_changed'),
                 'data' => '',
             ]);
         }
+
+        return response()->json([
+            'message' => __('messages.api.something_wrong'),
+            'data' => '',
+        ]);
     }
 
     /**
@@ -129,13 +122,13 @@ class LoginAPIController extends Controller
                 ->where('revoked', false)
                 ->first();
 
-            if (! $token) {
+            if (!$token) {
                 return WebUser::GetError(__('messages.api.login.invalid_refresh_token'));
             }
 
             $user = WebUser::find($token->user_id);
 
-            if (! $user) {
+            if (!$user) {
                 Helper::logSingleInfo(static::class, __FUNCTION__, 'User not found for access token during refresh.', [
                     'user_id' => $token->user_id,
                     'token_id' => $request->refresh_token,
@@ -198,7 +191,7 @@ class LoginAPIController extends Controller
     public static function logout(Request $request)
     {
         $token = $request->user()->token();
-        if ($token instanceof Token) {
+        if ($token && method_exists($token, 'revoke')) {
             $token->revoke();
         }
 
