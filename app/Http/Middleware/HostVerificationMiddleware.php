@@ -15,8 +15,8 @@ class HostVerificationMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $serverName = $_SERVER['SERVER_NAME'];
-        $httpHost = $_SERVER['HTTP_HOST'];
+        $serverName = $request->server('SERVER_NAME');
+        $httpHost = $request->server('HTTP_HOST');
 
         // Use Laravel's url() helper to get the full URL
         $fullUrl = url('');
