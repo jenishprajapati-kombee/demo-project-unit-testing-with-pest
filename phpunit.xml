@@ -17,6 +17,7 @@
             <file>app/Http/Controllers/API/LoginAPIController.php</file>
             <file>app/Livewire/Auth/Login.php</file>
             <file>app/Livewire/Auth/ForgotPassword.php</file>
+            <file>app/Livewire/Auth/ResetPassword.php</file>
             <file>app/Livewire/Brand/Create.php</file>
             <file>app/Helper.php</file>
         </include>
