@@ -17,6 +17,10 @@ Route::prefix('v1')->group(function () {
     Route::post('login', [App\Http\Controllers\API\LoginAPIController::class, 'login']);
     Route::post('forgot-password', [App\Http\Controllers\API\ForgotPasswordAPIController::class, 'sendResetLinkEmail']);
 
+    // Diagnostics
+    Route::get('diagnostics/failures', [App\Http\Controllers\API\FailureAnalysisAPIController::class, 'index']);
+    Route::post('analyze', [App\Http\Controllers\API\AIIncidentController::class, 'analyze']);
+
     // Batch Request
     Route::get('batch-request', [App\Http\Controllers\API\UserAPIController::class, 'batchRequest']);
 

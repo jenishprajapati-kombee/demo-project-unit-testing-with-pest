@@ -39,4 +39,9 @@ return [
         'key' => env('TINIFY_API_KEY'),
     ],
 
+    'ai' => [
+        'api_key' => env('AI_API_KEY'),
+        'provider' => env('AI_PROVIDER', 'gemini'), // 'gemini' or 'openai'
+    ],
+
 ];

@@ -36,6 +36,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Register API middleware
         $middleware->api([
             App\Http\Middleware\ApiTimeoutMiddleware::class,
+            App\Http\Middleware\FailureMonitorMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

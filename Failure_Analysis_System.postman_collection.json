@@ -1,0 +1,109 @@
+{
+    "info": {
+        "_postman_id": "8b9a2d3c-1a2b-4c5d-6e7f-8a9b0c1d2e3f",
+        "name": "Laravel AI failure Analysis",
+        "description": "API collection for monitoring and analyzing production failures in the Laravel application using AI-driven logic.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "AI Analysis",
+            "item": [
+                {
+                    "name": "Analyze Incident (AI)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            },
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"logs\": [\n    \"12:00 DB timeout\",\n    \"12:01 DB timeout\",\n    \"12:02 DB connection reset\"\n  ],\n  \"metrics\": {\n    \"cpu\": 85,\n    \"db_latency\": 400,\n    \"requests_per_sec\": \"High\"\n  }\n}"
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/analyze",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "analyze"
+                            ]
+                        },
+                        "description": "Send logs and metrics to the AI engine for root cause analysis."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Diagnostics",
+            "item": [
+                {
+                    "name": "Get System Failure Analysis (Legacy)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Accept",
+                                "value": "application/json",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/diagnostics/failures",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "diagnostics",
+                                "failures"
+                            ]
+                        },
+                        "description": "Returns a comprehensive analysis of system status, including CPU usage, memory usage, database connectivity, and recent log errors."
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "event": [
+        {
+            "listen": "prerequest",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        },
+        {
+            "listen": "test",
+            "script": {
+                "type": "text/javascript",
+                "exec": [
+                    ""
+                ]
+            }
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://127.0.0.1:8000",
+            "type": "string"
+        }
+    ]
+}
