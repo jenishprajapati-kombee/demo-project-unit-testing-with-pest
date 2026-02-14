@@ -1,0 +1,35 @@
+# Laravel Boost Guidelines
+
+Laravel Boost is an MCP server that provides tools designed for this Laravel application. Use them when you need live context about the app.
+
+## Artisan
+
+Use the **list-artisan-commands** tool to discover available Artisan commands and their parameters before suggesting or running commands. This avoids invalid options like `--columns` or `--a` on commands that do not support them.
+
+## URLs
+
+Use the **get-absolute-url** tool (or equivalent) to resolve relative paths or named routes to absolute URLs. This ensures the correct scheme, domain/IP, and port when sharing or verifying project URLs.
+
+## Configuration
+
+Use the **list-available-config-keys** tool to see all config keys (dot notation). Use **get-config** with a key (e.g. `app.name`, `database.default`) to read specific values before making assumptions.
+
+## Routes
+
+Use the **list-routes** tool to inspect registered routes when working on controllers, Livewire components, or API endpoints. This helps avoid wrong paths or HTTP methods.
+
+## Database
+
+Use the **database-connections** tool to see configured connection names and the default. Use **database schema** tools to inspect tables, columns, indexes, and foreign keys when writing migrations, models, or queries.
+
+## Logs & Errors
+
+Use the **last-error** tool to fetch the most recent backend exception when debugging. Use **application log** and **browser logs** tools to inspect recent log entries and frontend activity.
+
+## Tinker / Debugging
+
+Use the **tinker** tool to run PHP code or query Eloquent models in the Laravel context. Prefer this for quick debugging over creating temporary scripts.
+
+## Documentation
+
+Use the **search docs** tool for version-specific Laravel ecosystem documentation (Laravel, Pest, Livewire, etc.) when implementing features or fixing issues.
