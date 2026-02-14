@@ -10,5 +10,5 @@ $analysisService = app(App\Services\FailureAnalysisService::class);
 $result = $analysisService->analyze();
 
 echo "=== AI ANALYSIS RESULT ===\n";
-echo json_encode($result['ai_analysis'], JSON_PRETTY_PRINT);
+echo json_encode($result['ai_recommendation'] ?? $result['ai_analysis'], JSON_PRETTY_PRINT);
 echo "\n==========================\n";
