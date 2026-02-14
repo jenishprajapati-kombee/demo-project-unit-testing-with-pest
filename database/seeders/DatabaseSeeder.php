@@ -16,19 +16,5 @@ class DatabaseSeeder extends Seeder
         $this->call(EmailTemplateSeeder::class);
         $this->call(EmailFormatSeeder::class);
         $this->call(UserSeeder::class);
-
-        $this->call(CountrySeeder::class);
-
-        $this->call(StateSeeder::class);
-
-        $this->call(CitySeeder::class);
-
-        $this->call(WebUserSeeder::class);
-
-        $this->call(UserTagSeeder::class);
-
-        $this->call(BrandSeeder::class);
-
-        $this->call(ProductSeeder::class);
     }
 }

@@ -31,10 +31,12 @@
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.6",
+        "beyondcode/laravel-query-detector": "^2.0",
         "exin/enlightn": "^2.11",
         "fakerphp/faker": "^1.23",
         "fruitcake/laravel-debugbar": "^4.0",
         "larastan/larastan": "^3.7",
+        "laravel/boost": "^2.1",
         "laravel/dusk": "^8.3",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.18",
@@ -44,8 +46,7 @@
         "pestphp/pest": "^4.3",
         "pestphp/pest-plugin-laravel": "^4.0",
         "pestphp/pest-plugin-livewire": "^4.1",
-        "phpstan/phpstan": "^2.1",
-        "beyondcode/laravel-query-detector": "^2.0"
+        "phpstan/phpstan": "^2.1"
     },
     "repositories": [
         {
