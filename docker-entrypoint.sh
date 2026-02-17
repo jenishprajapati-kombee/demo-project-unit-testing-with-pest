@@ -15,9 +15,9 @@ if [ ! -d "vendor" ]; then
 fi
 
 # Telescope and Pulse setup
-echo "Setting up Telescope and Pulse..."
-php artisan telescope:install --no-interaction || true
-php artisan vendor:publish --provider="Laravel\Pulse\PulseServiceProvider" --no-interaction --force || true
+# echo "Setting up Telescope and Pulse..."
+# php artisan telescope:install --no-interaction || true
+# php artisan vendor:publish --provider="Laravel\Pulse\PulseServiceProvider" --no-interaction --force || true
 
 # Run migrations and seeders
 echo "Running migrations..."
