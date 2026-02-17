@@ -1,40 +1,50 @@
 # --- Base PHP image with required extensions ---
-    FROM php:8.3-fpm
+FROM php:8.3-fpm
 
-    # Install system dependencies
-    RUN apt-get update && apt-get install -y \
-        curl \
-        git \
-        unzip \
-        zip \
-        libpng-dev \
-        libonig-dev \
-        libxml2-dev \
-        libzip-dev \
-        && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    unzip \
+    zip \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    netcat-traditional \
+    libnss3 \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libcups2 \
+    libdrm2 \
+    libxkbcommon0 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxrandr2 \
+    libgbm1 \
+    libasound2 \
+    libpangocairo-1.0-0 \
+    libgtk-3-0 \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
-    # Install Composer
-    COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-    # Set working directory
-    WORKDIR /var/www/html
+# Set working directory
+WORKDIR /var/www/html
 
-    # Copy everything first (so artisan is available during composer install)
-    COPY . .
+# Copy everything first (so artisan is available during composer install)
+COPY . .
 
-    # Install PHP dependencies (with artisan available)
-    # RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
-    RUN composer install
+# Install Node & NPM (for Vite + Tailwind)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
-    # Install Node & NPM deps (for Vite + Tailwind)
-    RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-        && apt-get install -y nodejs \
-        && npm install \
-        && npm run build
+EXPOSE 8000
 
-    EXPOSE 8000
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-    CMD ["php-fpm"]
-    # COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-    # RUN chmod +x /usr/local/bin/entrypoint.sh
-    # ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["docker-entrypoint.sh"]
