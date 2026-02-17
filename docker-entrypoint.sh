@@ -19,6 +19,14 @@ echo "Setting up Telescope and Pulse..."
 php artisan telescope:install --no-interaction || true
 php artisan vendor:publish --provider="Laravel\Pulse\PulseServiceProvider" --no-interaction --force || true
 
+# Run migrations and seeders
+echo "Running migrations..."
+php artisan migrate --force
+
+echo "Running seeders..."
+# Check if we should run default seeders
+php artisan db:seed --force
+
 # Install Node dependencies if node_modules is missing
 if [ ! -d "node_modules" ]; then
     echo "node_modules directory missing. Installing dependencies..."
@@ -27,15 +35,7 @@ fi
 
 # Compile assets
 echo "Compiling assets..."
-npm run build
-
-# Run migrations and seeders
-echo "Running migrations..."
-php artisan migrate --force
-
-echo "Running seeders..."
-# Check if we should run default seeders
-php artisan db:seed --force
+npm run build || echo "Build failed, but continuing..."
 
 # Storage link
 echo "Creating storage link..."
