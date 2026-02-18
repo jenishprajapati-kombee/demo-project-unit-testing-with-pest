@@ -8,9 +8,10 @@ while ! nc -z mysql 3306; do
 done
 echo "Database is ready!"
 
-# Install PHP dependencies if vendor is missing or needs update
-if [ ! -d "vendor" ]; then
-    echo "Vendor directory missing. Installing dependencies..."
+# Install PHP dependencies if vendor/autoload.php is missing
+if [ ! -f "vendor/autoload.php" ]; then
+    echo "vendor/autoload.php missing. Installing dependencies..."
+    export COMPOSER_PROCESS_TIMEOUT=2000
     composer install --no-interaction --prefer-dist
 fi
 
@@ -27,9 +28,9 @@ echo "Running seeders..."
 # Check if we should run default seeders
 php artisan db:seed --force
 
-# Install Node dependencies if node_modules is missing
-if [ ! -d "node_modules" ]; then
-    echo "node_modules directory missing. Installing dependencies..."
+# Install Node dependencies if node_modules is missing or empty
+if [ ! -d "node_modules" ] || [ -z "$(ls -A node_modules)" ]; then
+    echo "node_modules directory missing or empty. Installing dependencies..."
     npm install
 fi
 
